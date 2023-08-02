@@ -67,6 +67,14 @@ SELECT skin from valorantskin order by skin_type;
 -- Which skins are classified under premium?
 SELECT skin, skin_type from valorantskin WHERE skin_type='premium';
 
+--How many skins are deluxe skins?
+SELECT count(deluxe) FROM valorantskin;
+
+--Which type of skin had the most skins on the list?
+SELECT skin_type, count(skin_type) as type_of_skin from valorantskin 
+group by(skin_type) 
+order by type_of_skin desc;
+
 --Which skins are B tier and above?
 SELECT skin, skin_type, popularity_tier from valorantskin WHERE popularity_tier >=60;
 
