@@ -1,0 +1,78 @@
+-- I created this SQL code for the online game Valorant and which skins are most popular, their skin type and price for the Vandal
+--table created where pupularity_tier: S=100, A=80, B=60, C=40, D=20, F=0
+
+40reate table valorantskin (id integer, skin text, skin_type text, price integer, popularity_tier text);
+
+insert into valorantskin values (1, prime, premium, 18, 100);
+insert into valorantskin values (2, valorant go, premium, 18, 20);
+insert into valorantskin values (3, tethered realms, premium, 18, 20);
+insert into valorantskin values (4, reaver, premium, 18, 100);
+insert into valorantskin values (5, origin, premium, 18, 80);
+insert into valorantskin values (6, oni, premium, 18, 60);
+insert into valorantskin values (7, neptune, premium, 18, 60);
+insert into valorantskin values (8, ion, premium, 18, 80);
+insert into valorantskin values (9, gaia vengeance, premium, 18, 80);
+insert into valorantskin values (10, forsaken, premium, 18, 20);
+insert into valorantskin values (11, ego, premium, 18, 60);
+insert into valorantskin values (12, cryostasis, premium, 18, 80);
+insert into valorantskin values (13, crimsonbeast, premium, 18, 60);
+insert into valorantskin values (14, sentinels of light, exclusive, 22, 100);
+insert into valorantskin values (15, rgx, exclusive, 22, 80);
+insert into valorantskin values (16, prelude to chaos, exclusive, 22, 80);
+insert into valorantskin values (17, glitchpop, exclusive, 22, 60);
+insert into valorantskin values (18, chronovoid, exclusive, 22, 80);
+insert into valorantskin values (19, araxys, exclusive, 22, 80);
+insert into valorantskin values (20, champions, exclusive, 27, 100);
+insert into valorantskin values (21, elderflame, ultra, 25, 100);
+insert into valorantskin values (22, winterwunderland, deluxe, 13, 40);
+insert into valorantskin values (23, wasteland, deluxe, 13, 40);
+insert into valorantskin values (24, venturi, deluxe, 0, 40);
+insert into valorantskin values (25, titanmail, deluxe, 13, 0);
+insert into valorantskin values (26, team ace, deluxe, 13, 40);
+insert into valorantskin values (27, silvanus, deluxe, 13, 40);
+insert into valorantskin values (28, sarmad, deluxe, 13, 40);
+insert into valorantskin values (29, sakura, deluxe, 13, 60);
+insert into valorantskin values (30, ruin, deluxe, 0, 60);
+insert into valorantskin values (31, nunca olvidados, deluxe, 13, 60);
+insert into valorantskin values (32, lycan bane, deluxe, 0, 20);
+insert into valorantskin values (33, luna, deluxe, 13, 40);
+insert into valorantskin values (34, ktac, deluxe, 0, 60);
+insert into valorantskin values (35, horizon, deluxe, 13, 40);
+insert into valorantskin values (36, hivemind, deluxe, 0, 0);
+insert into valorantskin values (37, cavalier, deluxe, 0, 0);
+insert into valorantskin values (38, avalanche, deluxe, 13, 0);
+insert into valorantskin values (39, aristocrat, deluxe, 13, 0);
+insert into valorantskin values (40, altitude, deluxe, 13, 40);
+insert into valorantskin values (41, sys, deluxe, 0, 60);
+insert into valorantskin values (42, starlit odyssey, select, 0, 40);
+insert into valorantskin values (43, sensation, select, 9, 20);
+insert into valorantskin values (44, schema, select, 0, 0);
+insert into valorantskin values (45, prism, select, 9, 20);
+insert into valorantskin values (46, nitro, select, 0, 20);
+insert into valorantskin values (47, luxe, select, 9, 0);
+insert into valorantskin values (48, immortalized, select, 0, 40);
+insert into valorantskin values (49, endeavour, select, 9, 40);
+insert into valorantskin values (50, depths, select, 0, 0);
+insert into valorantskin values (51, exe, select, 0, 40);
+
+--What is the sum, minimum, maxium, and average of price? 
+select sum(price) from valorantskin;
+select min(price) from valorantskin;
+select max(price) from valorantskin;
+select avg(price) from valorantskin;
+
+--Sort skin names from ascending and by type of skin
+SELECT skin from valorantskin order by skin_type;
+
+-- Which skins are classified under premium?
+SELECT skin, skin_type from valorantskin WHERE skin_type='premium';
+
+--Which skins are B tier and above?
+SELECT skin, skin_type, popularity_tier from valorantskin WHERE popularity_tier >=60;
+
+--Which skins are battlepass skins (where battlepass skins = 0)
+SELECT skin, skin_type, price from valorantskin WHERE price = 0;
+
+--Which skins cost more than 15, and less than 15?
+select * from valorantskin where price < 8;
+select * from valorantskin where price > 8;
