@@ -1,0 +1,32 @@
+-- This table was created for our Mr. Hibachi Nigiri menu based on how many times customer order a day
+
+Create table hibachinigiri (id integer, nigiri text, price integer, purchase integer);
+
+
+insert into hibachinigiri values (1, "bbq eel", 10, 88);
+insert into hibachinigiri values (2, "salmon roe", 8, 24);
+insert into hibachinigiri values (3, "salmon", 7, 100);
+insert into hibachinigiri values (4, "shrimp", 11, 62);
+insert into hibachinigiri values (5, "smoked salmon", 7, 75);
+insert into hibachinigiri values (6, "yellowtail", 7, 85);
+insert into hibachinigiri values (7, "pepper tuna", 8, 16);
+insert into hibachinigiri values (8, "crab stick", 7, 40);
+insert into hibachinigiri values (9, "white tuna", 7, 12);
+SELECT * FROM hibachinigiri;
+
+--What is the sum, minimum, maxium, and average of price? 
+select sum(price) from hibachinigiri;
+select min(price) from hibachinigiri;
+select max(price) from hibachinigiri;
+select avg(price) from hibachinigiri;
+
+--Which nigiri items cost 8, more than 8, and less than 8?
+select * from hibachinigiri where price = 8;
+select * from hibachinigiri where price < 8;
+select * from hibachinigiri where price > 8;
+
+--What are the top 3 most bought nigiri items on the hibachi nigiri menu?
+Select * from hibachinigiri
+where purchase >=50 
+order by purchase desc
+limit 3;
