@@ -1,5 +1,5 @@
 --This is a sample data set of Awesome Chocolates.
---At the botto of this data set I will show my knowledge of using basic queries such as SELECT, WHERE, ORDER BY, GROUP BY, Etc.
+--At the bottom of this data set I will show my knowledge of using basic queries such as SELECT, WHERE, ORDER BY, GROUP BY, Etc.
 
 CREATE DATABASE  IF NOT EXISTS `awesome chocolates` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `awesome chocolates`;
@@ -135,4 +135,86 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-22 15:20:20
+
+
+
+--Queries
+--Show Tables (Shows which tables are available)
+show tables;
+
+--desc (shows whats in the tables)
+desc sales;
+
+--select (see whats in the tables) (* shows everything)
+select * from sales;
+
+--select (if you want to specific columns within the table)
+select SaleDate, Amount, Customers from sales;
+
+--Calculation with Select (does operation within select, also add a name for operation)
+select SaleDate, Amount, Boxes, Amount / Boxes from sales;
+select SaleDate, Amount, Boxes, Amount / Boxes 'Amount per box' from sales;
+
+--Use select to impose condition (where clause)
+select * from sales
+where amount > 10000;
+
+--order by amount (arrange by, can add 'desc' next to amount to show descending instead of ascending)
+select * from sales
+where amount > 10000
+order by amount;
+
+select * from sales
+where amount > 10000
+order by amount desc;
+
+select * from sales
+where geoid='g1'
+order by PID, Amount desc;
+
+--and (to add multiple criteria) (date format = YY-MM-DD)
+select * from sales
+where amount > 10000 and SaleDate >= '2022-01-01';
+
+--if there is more data past the year
+select SaleDate, Amount from sales
+where amount > 10000 and year(SaleDate) = 2022
+order by amount desc;
+
+--BETWEEN condition
+select * from sales 
+where boxes > 0 and boxes <= 50;
+
+select * from sales
+where boxes between 0 and 50;
+
+--weekday function
+select SaleDate, Amount, Boxes, weekday(SaleDate) as 'Day of week'
+from sales
+where weekday(SaleDate) = 4;
+
+--Using Multiple Tables 
+select * from people
+where team = 'Delish' or team = 'Jucies';
+
+--in clause (same as above)
+select * from people
+where team in ('Delish', 'Jucies');
+
+-- like function (first examble is where word starts with b, second example is where word has the letter b in it)
+select * from people
+where salesperson like 'B%';
+
+select * from people
+where salesperson like '%B%';
+
+--Case Operator
+select * from sales;
+
+select SaleDate, Amount,
+    case when amount < 1000 then 'Under 1k'
+         when amount < 5000 then 'Under 5k'
+         when amount < 10000 then 'Under 10k'
+        else '10k or more'
+      end as 'Amount category'
+from sales;
