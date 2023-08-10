@@ -201,7 +201,7 @@ where team = 'Delish' or team = 'Jucies';
 select * from people
 where team in ('Delish', 'Jucies');
 
--- like function (first examble is where word starts with b, second example is where word has the letter b in it)
+-- like function (first example is where word starts with b, second example is where word has the letter b in it)
 select * from people
 where salesperson like 'B%';
 
@@ -218,3 +218,28 @@ select SaleDate, Amount,
         else '10k or more'
       end as 'Amount category'
 from sales;
+
+--Joins 
+select * from sales;
+select * from people;
+
+select s.saleDate, s.amount, p.Salesperson, s.SPID, p.spid
+from sales s
+join people p on p.SPID = s.SPID;
+
+select s.saleDate, s.amount, pr.product
+from sales s
+left join products pr on pr.pid = s.pid;
+
+--combine two joins
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales s
+join people p on p.SPID = s.SPID
+join products pr on pr.pid = s.pid;
+
+--join with condition
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales s
+join people p on p.SPID = s.SPID
+join products pr on pr.pid = s.pid
+where s.amount <500;
