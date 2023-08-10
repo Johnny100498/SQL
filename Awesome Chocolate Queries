@@ -243,3 +243,66 @@ from sales s
 join people p on p.SPID = s.SPID
 join products pr on pr.pid = s.pid
 where s.amount <500;
+
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales s
+join people p on p.SPID = s.SPID
+join products pr on pr.pid = s.pid
+where s.amount <500
+and p.Team = 'Delish';
+
+select s.saleDate, s.amount, p.Salesperson, pr.product, p.team
+from sales s
+join people p on p.SPID = s.SPID
+join products pr on pr.pid = s.pid
+join geo g on g.geoid = s.geoid
+where s.amount <500
+and p.Team = ''
+and g.Geo in ('New Zealand','India')
+order by saleDate;
+
+--Group by (create report style datasets)
+select geoID, sum(amount), avg(amount), sum(boxes)
+from sales
+group by geoID;
+
+select geoID, sum(amount), avg(amount), sum(boxes)
+from sales
+join geo g on s.geoID = g.geoID
+group by g.geo;
+
+select pr.category, p.team, sum(boxes), sum(amount)
+from sales s
+join people p on p.spid = s.spid
+join products pr on pr.pid = s.pid
+group by pr.category, p.team;
+
+select pr.category, p.team, sum(boxes), sum(amount)
+from sales s
+join people p on p.spid = s.spid
+join products pr on pr.pid = s.pid
+group by pr.category, p.team
+order by pr.category, p.team;
+
+--(this example allows that no nulls are shown on the report)
+select pr.category, p.team, sum(boxes), sum(amount)
+from sales s
+join people p on p.spid = s.spid
+join products pr on pr.pid = s.pid
+where p.team <> ''
+group by pr.category, p.team
+order by pr.category, p.team;
+
+--Top 10 condition
+select pr.Product, sum(s.amount) as 'Total Amount'
+from sales s
+join products pr on pr.pid = s.pid
+group by pr.Product
+order by 'Total Amount' desc;
+
+select pr.Product, sum(s.amount) as 'Total Amount'
+from sales s
+join products pr on pr.pid = s.pid
+group by pr.Product
+order by 'Total Amount' desc
+limit 10;
